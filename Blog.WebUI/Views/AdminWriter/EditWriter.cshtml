@@ -1,0 +1,43 @@
+﻿@model Blog.EntityLayer.Entities.Writer
+@using Blog.EntityLayer.Enums
+@{
+    ViewBag.Title = "EditWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+    <h2 class="text-bold">YAZAR DÜZENLE</h2>
+</nav>
+<div class="p-3">
+    @using (Html.BeginForm("EditWriter", "AdminWriter", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.Label("Yazar Adı")
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Name)
+            <br />
+            @Html.Label("Yazar Soyadı")
+            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Surname)
+            <br />
+            @Html.Label("Yazar E-posta")
+            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Mail)
+            <br />
+            @Html.Label("Yazar Şifresi")
+            @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Password)
+            <br />
+            @Html.Label("Yazar Seviyesi")
+            @Html.DropDownListFor(X => X.Level, new SelectList(Enum.GetValues(typeof(Levels))), "Seviye Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Level)
+            <br />
+            @Html.Label("Yazar Hakkında")
+            @Html.TextAreaFor(x => x.About, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.About)
+            <br /><br />
+            <button class="btn btn-success">Kaydet</button>
+        </div>
+    }
+</div>
+

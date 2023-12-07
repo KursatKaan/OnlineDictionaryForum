@@ -1,0 +1,97 @@
+﻿@using Blog.EntityLayer.Entities
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Heading>
+@{
+    ViewBag.Title = "AllHeadings";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+
+<body class="hold-transition sidebar-mini">
+    <!-- Main content -->
+    <section class="content">
+        <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+            <h2 class="text-bold">TÜM BAŞLIKLAR</h2>
+        </nav>
+        <!-- Default box -->
+        <div class="p-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-end">
+                        @using (Html.BeginForm("AllHeadings", "WriterPanelHeading", FormMethod.Post))
+                        {
+                            <div class="input-group input-group-sm ml-auto">
+                                @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "Başlık içinde ara..." })
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- card-body -->
+                <div class="card-body p-0">
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%">
+                                    Başlık
+                                </th>
+                                <th style="width: 15%" class="text-center">
+                                    Kategori
+                                </th>
+                                <th style="width: 20%">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a>
+                                            @item.HeadingTitle
+                                        </a>
+                                        <br />
+                                        <small>
+                                            @(((DateTime)item.HeadingDate).ToString("dd.MM.yyyy HH:mm"))
+                                        </small>
+                                    </td>
+                                    <td class="project-state">
+                                        <span class="badge badge-warning">@item.Category.CategoryName</span>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" href="/WriterPanelContent/ContentByHeading/@item.Id">
+                                            <i class="fas fa-comments">
+                                                Entryler
+                                            </i>
+
+                                        </a>
+                                        <a class="btn btn-sm btn-success" href="/WriterPanelContent/AddContent/@item.Id">
+                                            <i class='fas fa-comment'>
+                                                Entry Gir
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <!-- /.Default box -->
+        <div class="pagelist pl-3">
+            @Html.PagedListPager(Model, page => Url.Action("AllHeadings", new { page }))
+        </div>
+    </section>
+    <!-- /. Main content -->
+</body>
+
+
+

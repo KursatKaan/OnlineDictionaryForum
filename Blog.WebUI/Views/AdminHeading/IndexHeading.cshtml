@@ -1,0 +1,118 @@
+﻿@using Blog.EntityLayer.Entities
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Heading>
+@{
+    ViewBag.Title = "IndexHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<body class="hold-transition sidebar-mini">
+    <!-- Main content -->
+    <section class="content">
+        <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+            <h2 class="text-bold">BAŞLIKLAR</h2>
+        </nav>
+
+        <!-- Default box -->
+        <div class="p-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="/AdminHeading/AddHeading" class="btn btn-success btn-sm">
+                                <span class="mr-2 fas fa-plus"></span>
+                                Yeni Başlık
+                            </a>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            @using (Html.BeginForm("IndexHeading", "AdminHeading", FormMethod.Post))
+                            {
+                                <div class="input-group input-group-sm ml-auto">
+                                    @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "Başlık içinde ara..." })
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-secondary">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- card-body -->
+                <div class="card-body p-0">
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%">
+                                    Başlık
+                                </th>
+                                <th style="width: 15%">
+                                    Yazar
+                                </th>
+                                <th style="width: 10%" class="text-center">
+                                    Durum
+                                </th>
+                                <th style="width: 15%" class="text-center">
+                                    Kategori
+                                </th>
+                                <th style="width: 20%">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a>
+                                            @item.HeadingTitle
+                                        </a>
+                                        <br />
+                                        <small>
+                                            @(((DateTime)item.HeadingDate).ToString("dd.MM.yyyy HH:mm"))
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <img alt="Avatar" class="table-avatar mr-3" src="@item.Writer.Image">
+                                        <span>@item.Writer.Name @item.Writer.Surname</span>
+                                    </td>
+                                    <td class="project-state">
+                                        @Html.Raw(item.HeadingStatus == true ? "<span class='badge badge-success'>Aktif</span>" : "<span class='badge badge-danger'>Pasif</span>")
+                                    </td>
+                                    <td class="project-state">
+                                        <span class="badge badge-warning">@item.Category.CategoryName</span>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" href="/AdminContent/ContentByHeading/@item.Id">
+                                            <i class="fas fa-comments">
+                                                Entryler
+                                            </i>
+                                        </a>
+                                        <a class="btn btn-info btn-sm" href="/AdminHeading/EditHeading/@item.Id">
+                                            <i class="fas fa-pencil-alt">
+                                                Düzenle
+                                            </i>
+                                        </a>
+                                        <a class="btn btn-sm @(item.HeadingStatus == true ? "btn-danger":"btn-success")" href="/AdminHeading/DeleteHeading/@item.Id?callingAction=IndexHeading">
+                                            @Html.Raw(item.HeadingStatus == true ? "<i class='fas fa-trash'> Pasif Et</i>" : "<i class='fas fa-recycle'> Aktif Et</i>")
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.Default box -->
+        </div>
+        <div class="pagelist pl-3">
+            @Html.PagedListPager(Model, page => Url.Action("IndexHeading", new { page }))
+        </div>
+    </section>
+    <!-- /. Main content -->
+</body>
+

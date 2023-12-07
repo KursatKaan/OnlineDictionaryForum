@@ -1,0 +1,75 @@
+﻿@model Blog.EntityLayer.Entities.Message
+@{
+    ViewBag.Title = "ComposeMessage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<html>
+
+<body class="hold-transition sidebar-mini">
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+        <h2 class="text-bold">İLETİŞİM & MESAJLAR</h2>
+    </nav>
+    <!-- Main content -->
+    <section class="content p-3">
+        <div class="row">
+            @Html.Partial("_AdminInboxPartial")
+            <div class="col-md-9">
+                <!-- Card -->
+                @using (Html.BeginForm("ComposeMessage", "AdminMessage", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card card-primary card-outline">
+                        <!-- Card-header -->
+                        <div class="card-header">
+                            <h3 class="card-title">Yeni Mesaj Oluştur</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- Card-body -->
+                        <div class="card-body">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ReceiverMail, new { @class = "form-control", placeholder = "Alıcı:" })
+                                @Html.ValidationMessageFor(x => x.ReceiverMail, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Konu:" })
+                                @Html.ValidationMessageFor(x => x.Subject, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextAreaFor(x => x.MessageContent, new { @class = "form-control", style = "height: 300px" })
+                                @Html.ValidationMessageFor(x => x.MessageContent, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="btn btn-default btn-file">
+                                    <i class="fas fa-paperclip"></i> Ek Ekle
+                                    <input type="file" name="attachment">
+                                </div>
+                                <p class="help-block">Max. 32MB</p>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <!-- Card-footer -->
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" name="submitButton" value="Send" class="btn btn-primary">
+                                    <i class="far fa-envelope"></i> Gönder
+                                </button>
+                            </div>
+                            <a href=" @Url.Action("InboxMessage", "AdminMessage" )" class="btn btn-default" role="button">
+                                <i class="fas fa-times"></i> İptal
+                            </a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                }
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+

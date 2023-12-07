@@ -1,0 +1,111 @@
+﻿@model Blog.EntityLayer.Entities.Writer
+@{
+    ViewBag.Title = "WriterProfile";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<body class="hold-transition sidebar-mini">
+    <!-- Content Header (Page header) -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+        <h2 class="text-bold">PROFİLİM</h2>
+    </nav>
+    <!-- /.Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content p-3">
+        <!-- Default box -->
+        <div class="card card-solid">
+            <div class="card-body pb-0">
+                <div class="align-items-stretch">
+                    <div class="col-12 align-items-stretch">
+
+                        <div class="card bg-light">
+                            @using (Html.BeginForm("WriterProfile", "WriterPanelProfile", FormMethod.Post, new {@enctype="multipart/form-data"}))
+                            {
+                                @Html.HiddenFor(x=>x.Id)
+                                <div class="card-body pt-0">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="card-header text-muted text-lg border-bottom-0">
+                                                        <i class="fa fa-trophy"></i><b> Rütbe:</b>
+                                                        <span>
+                                                            @Html.TextBoxFor(x => x.Level, new { @class = "form-control", @readonly = "readonly", @style = "width:150px;" })
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="text-muted text-lg">
+                                                        <i class="fa fa-address-card"></i><b> İsim:</b>
+                                                        <span>
+                                                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => x.Name)
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-muted text-lg">
+                                                        <i class="fa fa-address-card"></i><b> Soyisim:</b>
+                                                        <span>
+                                                            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => x.Surname)
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="text-muted text-lg">
+                                                        <i class="fa fa-at"></i><b> E-Posta:</b>
+                                                        <span>
+                                                            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => x.Mail)
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-muted text-lg">
+                                                        <i class="fa fa-key"></i><b> Şifre:</b>
+                                                        <span>
+                                                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => x.Password)
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted text-lg">
+                                                <i class="fa fa-address-card"></i><b> Hakkımda:</b>
+                                                @Html.TextAreaFor(x => x.About, new { @class = "form-control", @style = "height:100px; resize: none;" })
+                                                @Html.ValidationMessageFor(x => x.About)
+                                            </p>
+                                        </div>
+                                        <div class="col-3 mt-5">
+                                            <div class="row border text-center border d-flex flex-column align-items-center justify-content-center h-100">
+                                                <div class="d-flex align-items-center" style="overflow: hidden; width: 128px; height: 128px;">
+                                                    <img src="@Model.Image" alt="Resminiz Yok" class="rounded img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                                </div>
+
+                                            </div>
+                                            <input type="file" name="ImageFile" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right p-3">
+                                    <button class="btn btn-success">Değişiklikleri Uygula</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Default box -->
+    </section>
+    <!-- /.Main content -->
+</body>
+<!--
+
+-->

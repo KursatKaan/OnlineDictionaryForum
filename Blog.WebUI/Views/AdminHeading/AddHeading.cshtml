@@ -1,0 +1,28 @@
+﻿@model Blog.EntityLayer.Entities.Heading
+@{
+    ViewBag.Title = "AddHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+    <h2 class="text-bold">YENİ BAŞLIK EKLEME</h2>
+</nav>
+<div class="p-3">
+    @using (Html.BeginForm("AddHeading", "AdminHeading", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.Label("Başlık Adı")
+            @Html.TextBoxFor(x => x.HeadingTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.HeadingTitle, "", new { @class = "text-danger" })
+            <br />
+            @Html.Label("Kategori")
+            @Html.DropDownListFor(x => x.CategoryId, (IQueryable<SelectListItem>)ViewBag.categories, new { @class = "form-control" })
+            <br />
+            @Html.Label("Yazar")
+            @Html.DropDownListFor(x => x.WriterId, (IQueryable<SelectListItem>)ViewBag.writers, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-success">Başlığı Oluştur</button>
+        </div>
+    }
+</div>
+

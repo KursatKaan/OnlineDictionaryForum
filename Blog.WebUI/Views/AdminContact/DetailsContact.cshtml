@@ -1,0 +1,62 @@
+﻿@model Blog.EntityLayer.Entities.Contact
+@{
+    ViewBag.Title = "DetailsContact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<html>
+<body class="hold-transition sidebar-mini">
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+        <h2 class="text-bold">İLETİŞİM & MESAJLAR</h2>
+    </nav>
+    <!-- Main content -->
+    <section class="content p-3">
+        <div class="row">
+            <!-- col -->
+            @Html.Partial("_AdminInboxPartial")
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title text-secondary"><a href="/AdminContact/IndexContact" class="text-secondary">Gelen İletişim Formları</a> / @Model.Subject</h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Daha yeni"><i class="fas fa-chevron-left"></i></a>
+                            <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Daha eski"><i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <!-- message-info-->
+                        <div class="mailbox-read-info">
+                            <h5>@Model.Subject</h5>
+                            <h6>Gönderen: @Model.Name < @Model.Mail >
+                                <span class="mailbox-read-time float-right">@Model.ContactDate.ToString("dd.MM.yyyy HH:mm")</span>
+                        </h6>
+                    </div>
+                    <!-- /.message-info -->
+                    <!-- message-content -->
+                    <div class="mailbox-read-message">
+                        <p>@Model.Message</p>
+                    </div>
+                    <!-- /.message-content -->
+                    </div>
+                    <!-- /.card-footer -->
+                    <div class="card-footer">
+                        <div class="float-right">
+                            <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Yanıtla</button>
+                            <button type="button" class="btn btn-default"><i class="fas fa-share"></i> İlet</button>
+                        </div>
+                        <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Sil</button>
+                        <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Yazdır</button>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</body>
+</html>
+
+

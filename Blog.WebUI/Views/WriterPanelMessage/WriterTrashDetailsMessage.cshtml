@@ -1,0 +1,64 @@
+﻿@model Blog.EntityLayer.Entities.Message
+@{
+    ViewBag.Title = "WriterTrashDetailsMessage";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<html>
+<body class="hold-transition sidebar-mini">
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+        <h2 class="text-bold">MESAJLARIM</h2>
+    </nav>
+    <!-- Main content -->
+    <section class="content p-3">
+        <div class="row">
+            @Html.Partial("_WriterInboxPartial")
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title text-secondary"><a href="/WriterPanelMessage/WriterTrashMessage" class="text-secondary">Silinen Mesajlar</a> / @Model.Subject</h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Daha yeni"><i class="fas fa-chevron-left"></i></a>
+                            <a href="#" class="btn btn-tool" data-toggle="tooltip" title="Daha eski"><i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <!-- message-info-->
+                        <div class="mailbox-read-info">
+                            <h4>@Model.Subject</h4>
+                            <h6 class="d-flex justify-content-between">
+                                <span>
+                                    <span>Gönderen: @Model.SenderMail</span>
+                                    <br />
+                                    <span>Alıcı: @Model.ReceiverMail</span>
+                                </span>
+                                <span class="text-right">
+                                    <span class="mailbox-read-time">@Model.MessageDate.ToString("dd.MM.yyyy")</span>
+                                    <br />
+                                    <span class="mailbox-read-time">@Model.MessageDate.ToString("HH:mm")</span>
+                                </span>
+                            </h6>
+                        </div>
+                        <!-- /.message-info -->
+                        <!-- message-content -->
+                        <div class="mailbox-read-message">
+                            <p>@Html.Raw(Model.MessageContent)</p>
+                        </div>
+                        <!-- /.message-content -->
+                    </div>
+                    <!-- /.card-footer -->
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Yazdır</button>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</body>
+</html>
+

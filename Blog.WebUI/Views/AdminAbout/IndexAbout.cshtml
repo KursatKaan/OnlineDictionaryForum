@@ -1,0 +1,32 @@
+﻿@using Blog.EntityLayer.Entities
+@model Blog.EntityLayer.Entities.About
+@{
+    ViewBag.Title = "IndexAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<html>
+<body>
+
+    <section class="content">
+        <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+            <h2 class="text-bold">HAKKIMIZDA</h2>
+        </nav>
+        <!--Add Button-->
+        <div class="p-3">
+            <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#Modal1">
+                Hakkımızda Metnini Düzenle
+            </button>
+            @Html.Action("EditAbout", "AdminAbout", new { id = Model.Id })
+            <!-- /.Add Button-->
+            <!--Index-->
+            <div class="border border-3 shadow-sm bg-white">
+                @Html.Raw(Model.AboutDetails1)
+            </div>
+        </div>
+        
+        <!-- /.Index-->
+    </section>
+</body>
+</html>
+
+

@@ -1,0 +1,56 @@
+﻿@using Blog.EntityLayer.Entities
+@model IQueryable<Heading>
+
+
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- content -->
+        <section class="content">
+            <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+                <h2 class="text-bold">ANA SAYFA</h2>
+            </nav>
+            <!-- timeline -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="timeline mt-3">
+                            @foreach (var heading in Model)
+                            {
+                                <div>
+                                    <i class="fas fa-comment bg-yellow"></i>
+                                    <div class="timeline-item">
+                                        <div class="timeline-body pb-0">
+                                            <p class="text-pink text-bold">@heading.HeadingTitle</p>
+                                            <p>
+                                                @ViewData["LatestContent_" + heading.Id]
+                                            </p>
+                                        </div>
+                                        <div class="col timeline-header text-right">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1 pr-3">
+                                                    <a href="#" class="text-lightblue text-bold text-sm">@ViewData["WriterInfo_" + heading.Id]</a><br />
+                                                    <span class="text-secondary text-sm">
+                                                        @ViewData["ContentDate_" + heading.Id]
+                                                    </span>
+                                                </div>
+                                                <div class="p-0">
+                                                    <div class="d-flex align-items-center" style="overflow: hidden; width: 40px; height: 40px;">
+                                                        <img src="@heading.Writer.Image" alt="Resminiz Yok" class="rounded img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.timeline -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- ./wrapper -->
+</body>

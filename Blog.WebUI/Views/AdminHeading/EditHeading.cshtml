@@ -1,0 +1,27 @@
+﻿@model Blog.EntityLayer.Entities.Heading
+@{
+    ViewBag.Title = "EditHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+    <h2 class="text-bold">BAŞLIK DÜZENLE</h2>
+</nav>
+<div class="p-3">
+    @using (Html.BeginForm("EditHeading", "AdminHeading", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.HeadingDate)
+            @Html.HiddenFor(x => x.WriterId) <!--Geçici Çözüm-->
+            @Html.Label("Başlık Adı")
+            @Html.TextBoxFor(x => x.HeadingTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.HeadingTitle, "", new { @class = "text-danger" })
+            <br />
+            @Html.Label("Kategori")
+            @Html.DropDownListFor(x => x.CategoryId, (IQueryable<SelectListItem>)ViewBag.categories, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-success">Kaydet</button>
+        </div>
+    }
+</div>
+

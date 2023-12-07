@@ -1,0 +1,88 @@
+﻿@using Blog.EntityLayer.Entities
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Writer>
+@{
+    ViewBag.Title = "IndexWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<body class="hold-transition sidebar-mini">
+    <!-- Content Header (Page header) -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+        <h2 class="text-bold">YAZARLAR</h2>
+    </nav>
+
+    <div class="row d-flex justify-content-end pr-5 pt-3">
+        @using (Html.BeginForm("IndexWriter", "AdminWriter", FormMethod.Post))
+        {
+            <div class="input-group input-group-md">
+                @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "Yazar isminde ara..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    
+
+    <!-- Main content -->
+    <section class="content p-3">
+
+        <!-- Default box -->
+        <div class="card card-solid">
+            <div class="card-body pb-0">
+                <div class="row d-flex align-items-stretch">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-12 col-md-6 col-xl-4">
+
+                            <div class="card bg-light">
+
+                                <div class="card-header text-muted border-bottom-0">
+                                    Seviye: @item.Level
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="lead"><b>@item.Name @item.Surname</b></h2>
+                                            <p class="text-muted text-sm"><b>Hakkında: </b>@item.About</p>
+                                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> E-posta: @item.Mail</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-5 text-center" style="overflow: hidden; width: 128px; height: 128px;">
+                                            <img src="@item.Image" alt="Resminiz Yok" class="rounded img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-right">
+                                        <a href="/AdminWriter/EditWriter/@item.Id" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-user"></i> Düzenle
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <nav aria-label="Contacts Page Navigation">
+                    <ul class="pagination justify-content-center m-0">
+                        @Html.PagedListPager(Model, page => Url.Action("IndexWriter", new { page }))
+                    </ul>
+                </nav>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+</body>
+

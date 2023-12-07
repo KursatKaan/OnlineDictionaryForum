@@ -1,0 +1,33 @@
+﻿@using Blog.EntityLayer.Entities
+@model Blog.EntityLayer.Entities.About
+
+<!--About Add Popup-->
+<section class="content">
+    <div class="modal" id="Modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Hakkımızda Metni Düzenleme</h3>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditAbout", "AdminAbout", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(x=>x.Id)
+                        <div class="form-group">
+                            @Html.TextAreaFor(x => x.AboutDetails1, new { @class = "form-control", id = "compose-textarea"})
+                            @Html.ValidationMessageFor(x => x.AboutDetails1, "", new { @class = "text-danger"})
+                        </div>
+                        <!--Save-Cancel Buttons-->
+                        <div class="row">
+                            <div class="col d-flex justify-content-around">
+                                <button type="button" data-dismiss="modal" class="btn btn-sm btn-light border-secondary col-4">Vazgeç</button>
+                                <button type="submit" class="btn btn-sm btn-success border-success col-4">Kaydet</button>
+                            </div>
+                        </div>
+                        <!-- /.Save-Cancel Buttons-->
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

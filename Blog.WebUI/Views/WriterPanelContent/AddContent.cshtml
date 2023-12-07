@@ -1,0 +1,26 @@
+﻿@model Blog.EntityLayer.Entities.Content
+@{
+    ViewBag.Title = "AddContent";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+<nav class="navbar navbar-expand navbar-dark bg-dark align-items-center justify-content-center">
+    <h2 class="text-bold">ENTRY GİRİŞİ</h2>
+</nav>
+<div class="p-3">
+        <h3 class="text-pink">#@ViewBag.HeadingTitle</h3>
+    @using (Html.BeginForm("AddContent", "WriterPanelContent", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="hidden" name="HeadingId" value="@ViewBag.id" />
+            <br />
+            @Html.TextAreaFor(x => x.ContentText, 15, 30, new { @class = "form-control", placeholder = "Entry içeriğini girin..." })
+            @Html.ValidationMessageFor(x => x.ContentText, "", new { @class = "text-danger" })
+            <br />
+            <button class="btn btn-success">Gönder</button>
+        </div>
+    }
+</div>
+
+
